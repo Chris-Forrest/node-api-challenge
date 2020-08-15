@@ -46,7 +46,7 @@ router.get("/:id", validateProjectId, (req,res) => {
         })
 });
 
-router.get("./:id/actions", validateProjectId, async (req,res) => {
+router.get("/:id/actions", validateProjectId, async (req,res) => {
     try {
         const { id }= req.params
         const actions = await Actions.get(id);
