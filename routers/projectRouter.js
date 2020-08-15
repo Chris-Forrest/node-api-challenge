@@ -42,7 +42,7 @@ router.get("/:id", validateProjectId, (req,res) => {
         })
         .catch(err => {
             console.log(err.stack)
-            res.status(500).json({ message: "Project not found."}).
+            res.status(500).json({ message: "Project not found."})
         })
 });
 
