@@ -18,15 +18,15 @@ router.get("/:id", validateActionId, async (req,res) => {
     res.status(200).json(req.action)
 });
 
-router.delete("/:id", validateActionId, async (req,res) =>{
-    try{
-        const { id } = req.params;
-
-        const deletedAction = await Actions.remove(id);
-        res.status(200).json(deletedAction);
-    }catch(err){
-        res.status(500).json({ message: " Couldn't delete action."})
-    }
+router.delete("/:id", validateActionId, (req,res) =>{
+    Actions.get(req.params.id)
+    .then(action => {
+        res.status(200).json(action)
+    })
+    .catch(err => {
+        console.log(err.stack)
+        res.status(500).json({ error: "Action not found."})
+    })
 })
 
 router.put("/:id",validateActionId, async (req,res) => {
