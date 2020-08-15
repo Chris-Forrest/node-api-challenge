@@ -35,8 +35,15 @@ router.get("/", async (req, res) => {
     }
 });
 
-router.get("/:id", validateProjectId, (req, res) => {
-    res.status(200).json(req.project);
+router.get("/:id", validateProjectId, (req,res) => {
+    Projects.get(req.params.id)
+        .then(project => {
+            res.status(200).json(project)
+        })
+        .catch(err => {
+            console.log(err.stack)
+            res.status(500).json({ message: "Project not found."}).
+        })
 });
 
 router.get("./:id/actions", validateProjectId, async (req,res) => {
